@@ -1,38 +1,31 @@
 language: node_js
 node_js:
 - '4.2'
-
 env:
   global:
-  - GH_REF=github.com/prose/prose.git
+  - GH_REF=github.com/dougmet/prose.git
   - CXX=g++-4.8
   - DEPLOY_BRANCH=master
-  - secure: R+ZWJe6XOXit4QKOeQqlHw20k6CDuqDXEHo3SSkkdsEax+cWxIaKPv8C9zp+IA8SM32uz6DNkfo5wGUJ/HCUE/S3WZqlr7qijroshjsmcZPRx6+TxVRzE1Xp0iMbeGibSCFZGrWlJmYgHnq5rQAFtjiztNhkSmkhuq3d9nsg8xM=
-
+  - secure: v5bPvtoMjzefu5HSC8zkj+4ocfahuSSdRb6faxcqgXtRR4iV0t2SX3zW6XeuJ706Oh9I4OFw43kOzfV4wyHe6vR/H33nW8XRRQ0XHXZe8SR6IHynEzG+sSqDeEWOQwrEmHB3LRyRg3UEdUhf03YF21b5Tu1xYMnyXiiT6PTPtanAS4665JQprbvZknw3ypQ8Gio+Rv4LV2m8g/hOLfFqKVCH6+Rf2NjobyAZ6ZzE5OdU8HXOa5DERtpKaK03PMxLJUWzDEOhpOBZYuT07tofgIzryfRF60fUI8nLyewOdgLGR5nKI54KwjbyUi+H71xQoH9DSiWIVdhRouqv9hcEhDU71Lv2+He/4JgE1iqMIIX/mGdNEp7xzG/+nEGC3jV1PZtUQoNVIns6k2SROpP9rRmaJS7ixXJGTVtyq2XzBVak+ycN9Q1qv6ToToe9KliFqe/iBKOIeVGqPSySCAA+WpNDOhERoB0o6yH0WF1A0XM8OpJEpjzJNRE9FVog3J6s2d+7syKVmLxL5Ss3oPrupcGjd8rd0euHS02msQKyOPrNKmjsd3RN9RTKfb3eF+pqPU0jO2r92BUb8TeuBGuNhDpEBt9yCkWO6VwsySvli50tiAvgiVisdX1RAkqOVccPBMW3nZnFRw1sSZSpHBoT9FJ9URfXSTTXQMzLilspyQ4=
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
-
+    - g++-4.8
 cache:
   apt: true
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
 - chmod +x ./.build_scripts/deploy.sh
-
 before_script:
 - npm test
-
 script:
 - npm run build
-
 deploy:
   provider: script
   skip_cleanup: true
-  script: .build_scripts/deploy.sh
+  script: ".build_scripts/deploy.sh"
   on:
-    branch: ${DEPLOY_BRANCH}
+    branch: "${DEPLOY_BRANCH}"
